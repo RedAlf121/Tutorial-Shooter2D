@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://s4jq6g5xwttk"]
+
+[ext_resource type="Texture2D" uid="uid://djb1g40umbk1k" path="res://assets/player-sprites/shoot/shoot1.png" id="1_0nvhk"]
+[ext_resource type="Script" path="res://scenes/environment/GlobalObjects/bullet.gd" id="1_m5euf"]
+[ext_resource type="Texture2D" uid="uid://b785ftppkorav" path="res://assets/player-sprites/shoot/shoot2.png" id="2_ohx24"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_afxxh"]
+radius = 4.0
+height = 20.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bsme5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0nvhk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ohx24")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_m5euf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_afxxh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bsme5")
+animation = &"shoot"
+frame_progress = 0.762684
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="enemy_clash"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="kill"]

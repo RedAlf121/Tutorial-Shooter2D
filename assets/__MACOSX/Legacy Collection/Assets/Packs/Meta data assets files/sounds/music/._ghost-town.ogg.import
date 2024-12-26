@@ -1,0 +1,18 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://4x0wm2jyphpy"
+valid=false
+
+[deps]
+
+source_file="res://assets/__MACOSX/Legacy Collection/Assets/Packs/Meta data assets files/sounds/music/._ghost-town.ogg"
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

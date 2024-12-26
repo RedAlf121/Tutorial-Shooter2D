@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://dtovhlv88ra66"]
+
+[ext_resource type="Script" path="res://scenes/actors/Enemy/enemy.gd" id="1_188i8"]
+[ext_resource type="Texture2D" uid="uid://b8q1jwove8wgi" path="res://assets/Legacy Collection/Assets/Packs/SpaceShooter/Space Shooter files/enemy/sprites/enemy1.png" id="1_qgk0b"]
+[ext_resource type="Texture2D" uid="uid://bv24a5438c4ms" path="res://assets/Legacy Collection/Assets/Packs/SpaceShooter/Space Shooter files/enemy/sprites/enemy2.png" id="2_wtxm8"]
+[ext_resource type="Texture2D" uid="uid://c6jy52ekf1tvn" path="res://assets/Legacy Collection/Assets/Packs/SpaceShooter/Space Shooter files/enemy/sprites/enemy3.png" id="3_yyqjt"]
+[ext_resource type="Texture2D" uid="uid://bes5hht50paaq" path="res://assets/Legacy Collection/Assets/Packs/SpaceShooter/Space Shooter files/enemy/sprites/enemy4.png" id="4_8omea"]
+[ext_resource type="Texture2D" uid="uid://c17kb0m2ees1i" path="res://assets/Legacy Collection/Assets/Packs/SpaceShooter/Space Shooter files/enemy/sprites/enemy5.png" id="5_4kkae"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_83by8"]
+radius = 14.0
+height = 32.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q6bcm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qgk0b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wtxm8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yyqjt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8omea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4kkae")
+}],
+"loop": true,
+"name": &"enemy",
+"speed": 3.0
+}]
+
+[node name="Enemy" type="Area2D" groups=["Enemy"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_188i8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_83by8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q6bcm")
+animation = &"enemy"
+frame_progress = 0.342826
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="die"]
+[connection signal="body_entered" from="." to="." method="damage"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="kill"]

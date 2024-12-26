@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bpyj256kjqqu"
+path="res://.godot/imported/rise.ogg-459d760fafa8e884a3d77bd6f6407e6a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Legacy Collection/Assets/Packs/Gothicvania Cemetery/Phaser Demo/assets/sounds/rise.ogg"
+dest_files=["res://.godot/imported/rise.ogg-459d760fafa8e884a3d77bd6f6407e6a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

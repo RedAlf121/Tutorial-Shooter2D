@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://ow3r537hjul6"]
+
+[ext_resource type="Texture2D" uid="uid://cmnchv651y8ui" path="res://assets/Legacy Collection/Assets/Environments/space_background_pack/Blue Version/layered/blue-back.png" id="1_eoia2"]
+[ext_resource type="Script" path="res://scenes/environment/Level/main_level.gd" id="1_lv06w"]
+[ext_resource type="Script" path="res://scenes/environment/Level/parallax.gd" id="2_fp0d0"]
+[ext_resource type="PackedScene" uid="uid://dydjqi5leixw7" path="res://scenes/actors/Player/Player.tscn" id="2_hstb5"]
+[ext_resource type="Texture2D" uid="uid://d3w2gqbljo3cm" path="res://assets/Legacy Collection/Assets/Environments/space_background_pack/Blue Version/layered/prop-planet-big.png" id="2_o41tg"]
+[ext_resource type="Texture2D" uid="uid://cxuia37jeyl7a" path="res://assets/Legacy Collection/Assets/Environments/space_background_pack/Blue Version/layered/blue-stars.png" id="3_rnlj8"]
+[ext_resource type="Script" path="res://scenes/environment/Level/enemy_spawner.gd" id="6_1skcm"]
+[ext_resource type="PackedScene" uid="uid://dtovhlv88ra66" path="res://scenes/actors/Enemy/Enemy.tscn" id="8_bjoif"]
+
+[sub_resource type="Curve2D" id="Curve2D_leycx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 264, -8, 0, 0, 0, 0, 261, 153, 0, 0, 0, 0, 286, 154, 0, 0, 0, 0, 286, -8, 0, 0, 0, 0, 264, -8)
+}
+point_count = 5
+
+[node name="MainLevel" type="Node2D" groups=["MainLevel"]]
+script = ExtResource("1_lv06w")
+
+[node name="Player" parent="." instance=ExtResource("2_hstb5")]
+position = Vector2(67, 81)
+metadata/_edit_group_ = true
+
+[node name="Parallax" type="CanvasLayer" parent="."]
+script = ExtResource("2_fp0d0")
+
+[node name="Background" type="ParallaxBackground" parent="Parallax"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Parallax/Background"]
+motion_mirroring = Vector2(272, 0)
+
+[node name="Blue-back" type="Sprite2D" parent="Parallax/Background/ParallaxLayer"]
+texture = ExtResource("1_eoia2")
+centered = false
+
+[node name="Planet" type="ParallaxBackground" parent="Parallax"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Parallax/Planet"]
+motion_mirroring = Vector2(344, 0)
+
+[node name="Prop-planet-big" type="Sprite2D" parent="Parallax/Planet/ParallaxLayer"]
+position = Vector2(197.375, 64.625)
+scale = Vector2(3.27326, 3.08721)
+texture = ExtResource("2_o41tg")
+
+[node name="Prop-planet-big2" type="Sprite2D" parent="Parallax/Planet/ParallaxLayer"]
+position = Vector2(73, 199)
+scale = Vector2(3.27326, 3.08721)
+texture = ExtResource("2_o41tg")
+
+[node name="Stars" type="ParallaxBackground" parent="Parallax"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Parallax/Stars"]
+motion_mirroring = Vector2(272, 0)
+
+[node name="Blue-stars" type="Sprite2D" parent="Parallax/Stars/ParallaxLayer"]
+z_index = 1
+position = Vector2(142, 72)
+scale = Vector2(0.970588, 1.03438)
+texture = ExtResource("3_rnlj8")
+
+[node name="Utils" type="Node" parent="."]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="Utils"]
+
+[node name="EnemySpawner" type="Node" parent="."]
+script = ExtResource("6_1skcm")
+enemy_class = ExtResource("8_bjoif")
+
+[node name="EnemyPositionSpawn" type="Path2D" parent="EnemySpawner"]
+position = Vector2(0, 6)
+curve = SubResource("Curve2D_leycx")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="EnemySpawner/EnemyPositionSpawn"]
+position = Vector2(264, -8)
+rotation = 1.58943
+
+[node name="Timer" type="Timer" parent="EnemySpawner"]
+autostart = true
+
+[node name="Enemies" type="Node2D" parent="EnemySpawner"]
+
+[connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="spawn_enemy"]

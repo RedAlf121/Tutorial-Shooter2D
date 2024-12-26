@@ -1,0 +1,18 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cpcqovvxvj1f1"
+valid=false
+
+[deps]
+
+source_file="res://assets/__MACOSX/Legacy Collection/Assets/Packs/GothicVania-town-files/phaser-code/assets/sounds/._rpg_village02__loop.ogg"
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
